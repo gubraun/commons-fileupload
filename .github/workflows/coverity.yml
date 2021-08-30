@@ -31,7 +31,7 @@ jobs:
         if: steps.coverity-cache.outputs.cache-hit != 'true'
         run: |
           curl -k --user ${{ secrets.COVERITY_USER }}:${{ secrets.COVERITY_PASSPHRASE }} -o license.dat ${{ secrets.COVERITY_SERVER_URL }}/downloadFile.htm?fn=license.dat
-          curl -k --user ${{ secrets.COVERITY_USER }}:${{ secrets.COVERITY_PASSPHRASE }} ${{ secrets.COVERITY_SERVER_URL }}/downloadFile.htm?fn=cov-analysis-linux64-2021.06.tar.gz | tar -xvf -
+          curl -k --user ${{ secrets.COVERITY_USER }}:${{ secrets.COVERITY_PASSPHRASE }} ${{ secrets.COVERITY_SERVER_URL }}/downloadFile.htm?fn=cov-analysis-linux64-2021.06.tar.gz | tar -xvfz -
           mv cov-analysis-linux64-2021.06 cov-analysis
           cp license.dat ./cov-analysis/bin
           
