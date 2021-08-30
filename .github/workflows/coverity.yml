@@ -13,7 +13,7 @@ jobs:
     env:
       # COVERITY_TOOL_HOME: /opt/cov-analysis-linux64-2021.06
       # For GitHub-hosted runners, use this path instead
-      COVERITY_TOOL_HOME: ${{ GITHUB_WORKSPACE }}/cov-analysis
+      COVERITY_TOOL_HOME: ./cov-analysis
     steps:
       - uses: actions/checkout@v2
       
