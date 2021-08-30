@@ -19,9 +19,17 @@ jobs:
           $COVERITY_TOOL_HOME/bin/cov-build --dir idir mvn -Drat.skip=true -DskipTests=true clean package
           $COVERITY_TOOL_HOME/bin/cov-analyze --dir idir --ticker-mode none --all --webapp-security --enable-audit-mode --strip-path $PWD
           $COVERITY_TOOL_HOME/bin/cov-format-errors --dir idir --json-output-v7 coverity-results.json
-      - name: Convert results to SARIF
+
+      - name: Convert Coverity results to SARIF
         run: |
           $COVERITY_TOOL_HOME/node/bin/node $COVERITY_TOOL_HOME/SARIF/cov-format-sarif-for-github.js -i coverity-results.json -r gubraun/commons-fileupload -c gubraun/commons-fileupload `pwd` `git rev-parse HEAD` -o coverity-results.sarif
+         
+#      - name: Convert Coverity Results to SARIF
+#        uses: gautambaghel/coverity-scan-results-to-sarif@1.0.0
+#        with:
+#          pipeline-results-json: coverity-results.json
+#          output-results-sarif: coverity-results.sarif
+                
       - name: Upload SARIF file to GitHub UI
         uses: github/codeql-action/upload-sarif@v1
         with:
