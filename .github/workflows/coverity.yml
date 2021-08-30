@@ -11,31 +11,31 @@ jobs:
     name: Analyze
     runs-on: self-hosted
     env:
-      COVERITY_TOOL_HOME: /opt/cov-analysis-linux64-2021.06
+      # COVERITY_TOOL_HOME: /opt/cov-analysis-linux64-2021.06
       # For GitHub-hosted runners, use this path instead
-      # COVERITY_TOOL_HOME: ${{ GITHUB_WORKSPACE }}/cov-analysis
+      COVERITY_TOOL_HOME: ${{ GITHUB_WORKSPACE }}/cov-analysis
     steps:
       - uses: actions/checkout@v2
       
       # For GitHub-hosted runners
-#      - name: Cache Coverity Analysis
-#        id: coverity-cache
-#        uses: actions/cache@v2
-#        with:
-#          path: |
-#            cov-analysis/
-#          key: coverity-cache-ubuntu
+      - name: Cache Coverity Analysis
+        id: coverity-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            cov-analysis/
+          key: coverity-cache-ubuntu
           
-#      - name: Download Coverity
-#        if: steps.coverity-cache.outputs.cache-hit != 'true'
-#        run: |
-#          curl -k --user ${{ secrets.COVERITY_USER }}:${{ secrets.COVERITY_PASSPHRASE }} -o license.dat ${{ secrets.COVERITY_SERVER_URL }}/downloadFile.htm?fn=license.dat
-#          curl -k --user ${{ secrets.COVERITY_USER }}:${{ secrets.COVERITY_PASSPHRASE }} ${{ secrets.COVERITY_SERVER_URL }}/downloadFile.htm?fn=cov-analysis-linux64-2021.06.tar.gz | tar -xvf -
-#          mv cov-analysis-linux64-2021.06 cov-analysis
-#          cp license.dat ./cov-analysis/bin
+      - name: Download Coverity
+        if: steps.coverity-cache.outputs.cache-hit != 'true'
+        run: |
+          curl -k --user ${{ secrets.COVERITY_USER }}:${{ secrets.COVERITY_PASSPHRASE }} -o license.dat ${{ secrets.COVERITY_SERVER_URL }}/downloadFile.htm?fn=license.dat
+          curl -k --user ${{ secrets.COVERITY_USER }}:${{ secrets.COVERITY_PASSPHRASE }} ${{ secrets.COVERITY_SERVER_URL }}/downloadFile.htm?fn=cov-analysis-linux64-2021.06.tar.gz | tar -xvf -
+          mv cov-analysis-linux64-2021.06 cov-analysis
+          cp license.dat ./cov-analysis/bin
           
-#      - name: Configure Coverity
-#        run: $COVERITY_TOOL_HOME/bin/cov-configure --java
+      - name: Configure Coverity
+        run: $COVERITY_TOOL_HOME/bin/cov-configure --java
           
       # Common part of job
       - name: Coverity
