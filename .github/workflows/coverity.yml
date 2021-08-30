@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Coverity
         run: |
-          $COVERITY_TOOL_HOME/bin/cov-build --dir idir mvn -Drat.skip=true -DskipTests=true package
+          $COVERITY_TOOL_HOME/bin/cov-build --dir idir mvn -Drat.skip=true -DskipTests=true clean package
           $COVERITY_TOOL_HOME/bin/cov-analyze --dir idir --ticker-mode none --all --webapp-security --enable-audit-mode --strip-path $PWD
           $COVERITY_TOOL_HOME/bin/cov-format-errors --dir idir --json-output-v7 coverity-results.json
       - name: Convert results to SARIF
