@@ -1,4 +1,4 @@
-name: Coverity
+name: Coverity self-hosted
 
 on:
   workflow_dispatch:
