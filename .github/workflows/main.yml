@@ -4,10 +4,13 @@ on:
     - master
     
 jobs:
-  rapid_scan:
+  sca:
     name: Black Duck Scan
     runs-on: ubuntu-latest
     
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      
     - name: Detect Rapid Scan
       run: bash <(curl -s -L https://detect.synopsys.com/detect8.sh)
