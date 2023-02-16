@@ -9,4 +9,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Detect
-        run: bash <(curl -s -L https://detect.synopsys.com/detect8.sh) --blackduck.url=${{ secrets.BLACKDUCK_URL }} --blackduck.api.token=${{ secrets.BLACKDUCK_API_TOKEN }} --detect.tools=DETECTOR --detect.project.name=gubraun-prscan-demo --detect.project.version.name=main --detect.blackduck.scan.mode=RAPID
+        run: bash <(curl -s -L https://detect.synopsys.com/detect8.sh) --blackduck.url=${{ secrets.BLACKDUCK_URL }} --blackduck.api.token=${{ secrets.BLACKDUCK_API_TOKEN }} --detect.tools=DETECTOR --detect.project.name=gubraun-prscan-demo --detect.project.version.name=main --detect.blackduck.scan.mode=RAPID --detect.blackduck.rapid.compare.mode=BOM_COMPARE_STRICT
